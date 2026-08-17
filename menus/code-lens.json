@@ -1,0 +1,16 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Code Lens",
+          "submenu": [
+            { "label": "Toggle", "command": "code-lens:toggle" },
+            { "label": "Refresh", "command": "code-lens:refresh" }
+          ]
+        }
+      ]
+    }
+  ]
+}

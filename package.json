@@ -1,0 +1,61 @@
+{
+  "name": "code-lens",
+  "author": "lumine-code",
+  "description": "Show actionable command links above the code they describe.",
+  "repository": "https://github.com/lumine-code/code-lens",
+  "bugs": {
+    "url": "https://github.com/lumine-code/code-lens/issues"
+  },
+  "keywords": [
+    "codelens",
+    "reference-count",
+    "inline-actions",
+    "annotation",
+    "lsp"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "lumine": "^1.0.0"
+  },
+  "backgroundTips": [
+    "{% if keys['code-lens:toggle'] %}You can show or hide the actionable links above your code with {{ 'code-lens:toggle' | keystroke }}{% else %}You can show reference counts and run buttons above your functions by enabling Code Lens for a language in the settings.{% endif %}"
+  ],
+  "main": "./lib/main",
+  "files": [
+    "docs",
+    "lib",
+    "menus",
+    "spec",
+    "styles"
+  ],
+  "scripts": {
+    "test": "lumine --test spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "consumedServices": {
+    "code-lens.provider": {
+      "versions": {
+        "^1.0.0": "consumeCodeLens"
+      }
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.3.0",
+    "globals": "^17.11.0",
+    "prettier": "^3.9.6"
+  },
+  "configSchema": {
+    "enabled": {
+      "title": "Enabled",
+      "description": "Show code lens links above the code they describe. Also settable per language in scoped settings.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

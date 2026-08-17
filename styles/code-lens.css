@@ -1,0 +1,27 @@
+/* The lens row is a block decoration sitting above the line it annotates, so it
+   carries the editor's line height rather than a box of its own. */
+.code-lens {
+  font-size: 0.85em;
+  line-height: 1.8;
+  color: var(--text-color-subtle);
+}
+
+.code-lens a {
+  color: var(--text-color-subtle);
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.code-lens a:hover {
+  color: var(--text-color-info);
+  text-decoration: underline;
+}
+
+/* A lens with nothing to run reads as a label: it keeps the row's colour but
+   none of the affordances of a link. */
+.code-lens a.code-lens-inert,
+.code-lens a.code-lens-inert:hover {
+  color: var(--text-color-subtle);
+  cursor: default;
+  text-decoration: none;
+}
