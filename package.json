@@ -55,7 +55,7 @@
       "title": "Enabled",
       "description": "Show code lens links above the code they describe. Also settable per language in scoped settings.",
       "type": "boolean",
-      "default": false
+      "default": true
     }
   }
 }

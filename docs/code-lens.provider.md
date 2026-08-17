@@ -104,7 +104,7 @@ A refresh reconciles in place rather than rebuilding. A row that survives keeps 
 
 `grammarScopes` is **read through on every call, never snapshotted**. That is deliberate: a hub provider exposes it as a getter whose value changes as language server sessions come and go. A plain array is fine for a fixed set of grammars, but do not assume the registry cached it.
 
-Rendering is off by default and is switched on with the scoped `code-lens.enabled` setting, so a user can enable it for one language and not for the rest. While it is off no provider is asked at all — `codeLenses` is never called, so an expensive provider costs nothing until someone wants it.
+Rendering is gated by the scoped `code-lens.enabled` setting — on by default, so a user can switch it off for one language and not for the rest. While it is off no provider is asked at all — `codeLenses` is never called, so an expensive provider costs nothing where nobody wants it.
 
 A provider that throws is skipped for that fetch; the other providers still render.
 

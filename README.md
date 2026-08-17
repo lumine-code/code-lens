@@ -10,7 +10,7 @@ Lenses come from provider packages — typically language-server backends — an
 - **Every source at once**: stacks the lenses of all providers claiming a row side by side, ordered by provider priority.
 - **Lazy resolution**: shows a placeholder for a lens whose label is still being computed and fills it in when the row scrolls into view.
 - **In-place refresh**: reconciles a refetch row by row, so lenses that survive keep their decoration and the viewport never jumps.
-- **Per language**: stays off until enabled, and can be enabled for one language and not the rest through scoped settings.
+- **Per language**: on everywhere by default, and can be switched off for one language and not the rest through scoped settings.
 - **Edit tracking**: anchors every lens to a marker, so it keeps pace with edits above it between fetches.
 
 ## Installation
