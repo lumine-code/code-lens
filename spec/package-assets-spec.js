@@ -19,9 +19,9 @@ describe("code-lens package assets", () => {
   });
 
   it("ships a CSS stylesheet built on custom properties, not Less", () => {
-    expect(exists("styles/code-lens.css")).toBe(true);
+    expect(exists("styles/main.css")).toBe(true);
     expect(exists("styles/code-lens.less")).toBe(false);
-    const css = read("styles/code-lens.css");
+    const css = read("styles/main.css");
     expect(css).toContain(".code-lens");
     expect(css).toContain("var(--");
     expect(css).not.toContain("ide-client");
@@ -75,7 +75,7 @@ describe("code-lens package assets", () => {
   });
 
   it("places its commands in one Packages submenu named for the package", () => {
-    const menu = JSON.parse(read("menus/code-lens.json"));
+    const menu = JSON.parse(read("menus/main.json"));
     expect(menu["context-menu"]).toBeUndefined();
     const packages = menu.menu.find((item) => item.label === "Packages");
     const submenu = packages.submenu.find((item) => item.label === "Code Lens");
