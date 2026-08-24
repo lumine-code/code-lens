@@ -30,7 +30,7 @@ The lens row can be adjusted in the `styles.css` file, e.g. make the links stand
 
 ```css
 .code-lens a {
-  color: var(--text-color-info);
+  color: var(--accent-only-text-color);
   font-style: italic;
 }
 ```
