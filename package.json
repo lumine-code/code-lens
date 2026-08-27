@@ -54,6 +54,7 @@
     "enabled": {
       "title": "Enabled",
       "description": "Show code lens links above the code they describe. Also settable per language in scoped settings.",
+      "scopeResolution": "grammar",
       "type": "boolean",
       "default": true
     }
