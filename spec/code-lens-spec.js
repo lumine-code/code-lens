@@ -194,7 +194,7 @@ describe("code-lens", () => {
     expect(notifications[0].getOptions().detail).toBe("no can do");
   });
 
-  it("asks no provider and renders nothing while the scoped setting is off", async () => {
+  it("asks no provider and renders nothing while the setting is off", async () => {
     lumine.config.set("code-lens.enabled", false);
     const codeLenses = jasmine.createSpy("codeLenses").and.resolveTo([lensAt(0, "hidden")]);
     addProvider({ codeLenses });
@@ -208,6 +208,17 @@ describe("code-lens", () => {
     await microtasks();
     expect(codeLenses).toHaveBeenCalled();
     expect(textsByRow()).toEqual([["hidden"]]);
+  });
+
+  it("reacts immediately when a scoped-only override changes", async () => {
+    addProvider({ codeLenses: async () => [lensAt(0, "visible")] });
+    await microtasks();
+    expect(textsByRow()).toEqual([["visible"]]);
+
+    const rootScope = editor.getRootScopeDescriptor().getScopesArray()[0];
+    lumine.config.set("code-lens.enabled", false, { scopeSelector: `.${rootScope}` });
+    await microtasks();
+    expect(manager.states.get(editor).rows.size).toBe(0);
   });
 
   it("keeps the other providers rendering when one throws", async () => {
