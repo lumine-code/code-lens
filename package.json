@@ -18,9 +18,6 @@
   "engines": {
     "lumine": "^1.0.0"
   },
-  "backgroundTips": [
-    "{% if keys['code-lens:toggle'] %}You can show or hide the actionable links above your code with {{ 'code-lens:toggle' | keystroke }}{% else %}You can show reference counts and run buttons above your functions by enabling Code Lens for a language in the settings.{% endif %}"
-  ],
   "main": "./lib/main",
   "files": [
     "docs",
@@ -34,6 +31,13 @@
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
+  },
+  "providedServices": {
+    "background-tips.provider": {
+      "versions": {
+        "1.0.0": "provideBackgroundTips"
+      }
+    }
   },
   "consumedServices": {
     "code-lens.provider": {

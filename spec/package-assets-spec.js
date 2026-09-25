@@ -41,10 +41,12 @@ describe("code-lens package assets", () => {
     expect(pkg.engines.lumine).toBe("^1.0.0");
   });
 
-  it("consumes code-lens.provider and provides nothing", () => {
+  it("consumes code-lens.provider and provides background tips", () => {
     const pkg = JSON.parse(read("package.json"));
     expect(pkg.consumedServices["code-lens.provider"].versions["^1.0.0"]).toBe("consumeCodeLens");
-    expect(pkg.providedServices).toBeUndefined();
+    expect(pkg.providedServices["background-tips.provider"].versions["1.0.0"]).toBe(
+      "provideBackgroundTips",
+    );
   });
 
   it("keeps a keyword list that never repeats the package name", () => {
