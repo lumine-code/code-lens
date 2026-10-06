@@ -13,7 +13,7 @@
 }
 
 .code-lens a:hover {
-  color: var(--accent-only-text-color);
+  color: var(--accent-link-color);
   text-decoration: underline;
 }
 
