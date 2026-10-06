@@ -9,7 +9,7 @@ Supplies the actionable links rendered above the code they describe.
 | Consumed by | `consumeCodeLens(provider)` returning a `Disposable`    |
 | Owner       | [`code-lens`](https://github.com/lumine-code/code-lens) |
 
-If your lenses come from a language server, register an adapter with `ide-client` instead — it already provides this service on every adapter's behalf. Implement this directly only for a source that is not LSP: a test runner, a blame reader, a build system.
+If your lenses come from a language server, register an adapter with `ide` instead — it already provides this service on every adapter's behalf. Implement this directly only for a source that is not LSP: a test runner, a blame reader, a build system.
 
 ## Registration
 
@@ -57,7 +57,7 @@ Optional members:
 | `resolveCodeLens(lens, editor)` | Fill in a placeholder lens when its row scrolls into view. See Lazy resolution.               |
 | `onDidInvalidate(callback)`     | Announce that your lenses went stale. Pass `{editor}` to refetch one, nothing to refetch all. |
 | `grammarScopes`                 | Scope names you serve. **Omitting it means every grammar.** May be a getter — see Behavior.   |
-| `priority`                      | Higher sorts first within a row. Defaults to `0`; `ide-client` uses `2`.                      |
+| `priority`                      | Higher sorts first within a row. Defaults to `0`; `ide` uses `2`.                             |
 
 Only the **start row** of `range` decides placement: the lens is drawn on its own line above that buffer row, and the column is ignored. Return the range of the symbol anyway — it is what keeps the lens on the right line as the buffer is edited.
 
