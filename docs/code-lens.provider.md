@@ -112,6 +112,8 @@ A provider that throws is skipped for that fetch; the other providers still rend
 
 `consumeCodeLens` returns a `Disposable` that removes the provider from the registry and drops whatever it had rendered. Return it from your own consumer method or add it to your collection; nothing else is held on your behalf.
 
+Registrations of the identical provider object share one rendered source and one invalidation subscription. The provider remains active until its final registration is disposed.
+
 The `Disposable` returned by `onDidInvalidate` is disposed for you when the provider is removed.
 
 ## Versioning
