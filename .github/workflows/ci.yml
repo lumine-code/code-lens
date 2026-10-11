@@ -40,15 +40,33 @@ jobs:
         run: npm run lint
       - name: Check formatting
         run: npm run format:check
+      - name: Audit production dependencies
+        run: npm audit --omit=dev
+      - name: Check package contents
+        run: npm pack --dry-run
 
   integration:
     # Run the Jasmine spec suite inside a real Lumine build; the specs exercise
     # the editor runtime (text editors, block decorations, and command dispatch).
-    name: Lumine integration specs
-    runs-on: ubuntu-latest
+    name: Lumine integration specs on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
     env:
       LUMINE_JASMINE_REPORTER: list
+      LUMINE_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT: "true"
+      LUMINE_HOME: ${{ github.workspace }}/code-lens-home
+      HOME: ${{ github.workspace }}/code-lens-home
+      USERPROFILE: ${{ github.workspace }}/code-lens-home
+      TEMP: ${{ github.workspace }}/code-lens-temp
+      TMP: ${{ github.workspace }}/code-lens-temp
+      TMPDIR: ${{ github.workspace }}/code-lens-temp
     steps:
       - uses: actions/checkout@v7
         with:
@@ -62,7 +80,10 @@ jobs:
           node-version-file: lumine/.nvmrc
           cache: npm
           cache-dependency-path: lumine/package-lock.json
+      - name: Create private runtime directories
+        run: mkdir -p "$LUMINE_HOME/electronUserData" "$TEMP"
       - name: Install Linux build and headless-display dependencies
+        if: runner.os == 'Linux'
         run: |
           # A third-party repository on the runner image answering 403 must not
           # fail the job: the lists this actually needs still fetched, and the
@@ -90,4 +111,9 @@ jobs:
       - name: Run the Jasmine spec suite
         working-directory: lumine
         timeout-minutes: 20
-        run: xvfb-run --auto-servernum npm start -- --test ../code-lens/spec
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            xvfb-run --auto-servernum npm start -- --test ../code-lens/spec
+          else
+            npm start -- --test ../code-lens/spec
+          fi
