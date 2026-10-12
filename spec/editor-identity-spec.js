@@ -66,7 +66,7 @@ describe("Code Lens editor identity", () => {
   }
 
   it("refreshes the inactive split editor that dispatched the command", async () => {
-    firstPane.splitRight({ copyActiveItem: false });
+    firstPane.splitRight();
     second = await lumine.workspace.open(path.join(scratch, "after.txt"));
     second.getElement().setUpdatedSynchronously(true);
     firstPane.activate();
