@@ -8,7 +8,9 @@
           "submenu": [
             {
               "label": "Code Lens",
-              "command": "code-lens:toggle"
+              "command": "code-lens:toggle",
+              "group": "intelligence",
+              "order": 10
             }
           ]
         }
