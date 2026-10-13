@@ -13,6 +13,8 @@ Lenses come from provider packages — typically language-server backends — an
 - **Per language**: on everywhere by default, and can be switched off for one language and not the rest through scoped settings.
 - **Edit tracking**: anchors every lens to a marker, so it keeps pace with edits above it between fetches.
 
+![Show reference counts above a TypeScript function.](.github/demo.png)
+
 ## Installation
 
 To install `code-lens` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/code-lens`.

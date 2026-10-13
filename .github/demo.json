@@ -1,0 +1,17 @@
+{
+  "title": "code-lens",
+  "description": "Show reference counts above a TypeScript function.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "3254c008515120d557f7e6403c1f8767c265a7e9",
+  "mode": "normal",
+  "fontSettings": "default",
+  "themeSourceRevision": "6564a9e21899b5541e9c8f8006f9be6d6d72e6ad",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "Show reference counts above a TypeScript function.",
+      "width": 1150,
+      "height": 600
+    }
+  ]
+}
