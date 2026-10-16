@@ -58,7 +58,7 @@ describe("Code Lens editor identity", () => {
       !path.basename(resolved).startsWith("code-lens-identity-")
     )
       throw new Error("Owned fixture cleanup escaped its temporary root");
-    fs.rmSync(resolved, { recursive: true, force: true });
+    fs.rmSync(resolved, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   });
 
   function provide(codeLenses) {
