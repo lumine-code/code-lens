@@ -86,7 +86,7 @@ describe("Code Lens editor identity", () => {
     expect(titles(second)).toEqual(["after.txt"]);
   });
 
-  it("uses the active editor for an ordinary workspace refresh", async () => {
+  it("does not refresh an editor for an unrelated workspace target", async () => {
     const calls = [];
     provide((editor) => {
       calls.push(editor);
@@ -96,7 +96,7 @@ describe("Code Lens editor identity", () => {
     calls.length = 0;
     lumine.commands.dispatch(lumine.workspace.getElement(), "code-lens:refresh");
     await settle();
-    expect(calls).toEqual([first]);
+    expect(calls).toEqual([]);
     expect(titles()).toEqual(["ordinary"]);
   });
 

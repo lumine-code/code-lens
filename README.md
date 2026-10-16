@@ -24,7 +24,10 @@ To install `code-lens` search for it in the Install pane of the Lumine settings,
 Commands available in `lumine-workspace`:
 
 - `code-lens:toggle`: show or hide the lens links above your code,
-- `code-lens:refresh`: ask the providers for the active file's lenses again.
+
+Commands available in `lumine-text-editor:not([mini])`:
+
+- `code-lens:refresh`: ask the providers for this editor's lenses again.
 
 ## Customization
 
