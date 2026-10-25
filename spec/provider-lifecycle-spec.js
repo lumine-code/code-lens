@@ -6,6 +6,11 @@ async function settle() {
 }
 
 describe("code-lens provider connection lifetime", () => {
+  // Analysis fixtures use a real grammar; None deliberately disables this package.
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-text");
+  });
+
   let main, editor, hub, consumer, disposables;
   beforeEach(async () => {
     jasmine.attachToDOM(lumine.workspace.getElement());

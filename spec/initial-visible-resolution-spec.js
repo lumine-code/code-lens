@@ -1,4 +1,9 @@
 describe("Code Lens resolution in an already visible viewport", () => {
+  // Analysis fixtures use a real grammar; None deliberately disables this package.
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-text");
+  });
+
   let editor, main, lease;
   const settle = async () => {
     for (let i = 0; i < 40; i++) await Promise.resolve();

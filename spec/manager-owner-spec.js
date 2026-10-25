@@ -1,6 +1,11 @@
 const { Disposable } = require("lumine");
 
 describe("Code Lens manager request ownership", () => {
+  // Analysis fixtures use a real grammar; None deliberately disables this package.
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-text");
+  });
+
   let main, manager, editor, leases;
   const lens = (title, extra = {}) => ({
     range: [

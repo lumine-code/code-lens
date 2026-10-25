@@ -20,6 +20,11 @@ const lensAt = (row, title, extra = {}) => ({
 });
 
 describe("code-lens", () => {
+  // Analysis fixtures use a real grammar; None deliberately disables this package.
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-text");
+  });
+
   let mainModule, manager, editor, disposables;
 
   beforeEach(async () => {
@@ -68,6 +73,26 @@ describe("code-lens", () => {
   const rowItems = () => editor.getElement().querySelectorAll(".code-lens");
   const textsByRow = () =>
     [...rowItems()].map((item) => [...item.children].map((a) => a.textContent));
+
+  it("clears lenses and suspends providers for None until a grammar is selected", async () => {
+    const grammar = editor.getGrammar();
+    const codeLenses = jasmine.createSpy("lenses").and.returnValue([lensAt(0, "reference")]);
+    addProvider({ codeLenses });
+    await microtasks();
+    expect(rowItems().length).toBe(1);
+    const calls = codeLenses.calls.count();
+    editor.setGrammar(lumine.grammars.nullGrammar);
+    expect(lumine.commands.canDispatch(editor.getElement(), "code-lens:refresh")).toBeFalse();
+    await microtasks();
+    manager.fetchEditor(editor);
+    await microtasks();
+    expect(rowItems().length).toBe(0);
+    expect(codeLenses.calls.count()).toBe(calls);
+    editor.setGrammar(grammar);
+    await microtasks();
+    expect(codeLenses.calls.count()).toBeGreaterThan(calls);
+    expect(rowItems().length).toBe(1);
+  });
 
   it("renders lenses as block decorations grouped per row", async () => {
     addProvider({
