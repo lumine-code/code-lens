@@ -94,6 +94,22 @@ describe("code-lens", () => {
     expect(rowItems().length).toBe(1);
   });
 
+  it("retires an older edit debounce before resuming the same grammar", async () => {
+    const grammar = editor.getGrammar();
+    const codeLenses = jasmine.createSpy("lenses").and.returnValue([lensAt(0, "reference")]);
+    addProvider({ codeLenses });
+    await microtasks();
+    manager.scheduleFetch(manager.states.get(editor));
+    editor.setGrammar(lumine.grammars.nullGrammar);
+    editor.setGrammar(grammar);
+    await microtasks();
+    const resumed = codeLenses.calls.count();
+    advanceClock(1001);
+    await microtasks();
+    expect(codeLenses.calls.count()).toBe(resumed);
+    expect(rowItems().length).toBe(1);
+  });
+
   it("renders lenses as block decorations grouped per row", async () => {
     addProvider({
       codeLenses: async () => [
